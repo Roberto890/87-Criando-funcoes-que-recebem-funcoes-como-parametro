@@ -1,9 +1,9 @@
 package application;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.ArrayList;
 import entities.Product;
+import model.services.ProductService;
 
 public class Program {
 
@@ -15,14 +15,14 @@ public class Program {
         list.add(new Product("Tablet", 350.50));
         list.add(new Product("HD Case", 80.90));
 
+        ProductService ps = new ProductService();
 
-        System.out.println("After:");
-        for (Product product : list) {
-            System.out.println(product.toString());
-        }
+        //FAZENDO ASSIM VAI FUNCIONAR PARA QUALQUER PREDICADO ASSIM NAO MEXENDO NA FUNCAO E SIM NO PARAMETRO        
+        //double sum = ps.filteredSum(list, p -> p.getName().charAt(0) == 'T');
+        //double sum = ps.filteredSum(list, p -> p.getName().charAt(0) == 'M');
+        double sum = ps.filteredSum(list, p -> p.getPrice() < 100.00);
 
-
-        System.out.println("\nBefore:");
-        list.forEach(System.out::println);
+        System.out.println("Sum = " + String.format("%.2f", sum));
+        
     }
 }
